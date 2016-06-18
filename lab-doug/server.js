@@ -25,8 +25,7 @@ app.use(morgan('dev'));
 app.all('*', function(req, res, next){
   debug('this route is not registered');
   /**
-   * We create a new error using http-errors module and include it as the argument passed in next.
-   * By calling next with an error, we trigger the errorHandler middleware module to handle this error
+   * We create a new error using http-errors module and include it as the argument passed in next.  By calling next with an error, we trigger the errorHandler middleware module to handle this error
    */
   next(httpErrors(404, 'this route is not registered'));
 
