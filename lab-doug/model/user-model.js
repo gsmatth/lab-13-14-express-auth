@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
  * userSchema.methods.setHashedPassword - accepts input of plain text password  and generates a hash from that password using bcrypt.hash method.  The hash will be stored in place of the password property in that users database entry, preventing the plain text password from ever being stored in the database
  *
  * @param  {String} password plain text password
- * @return {String}          hashed password 
+ * @return {Object}          User with updated password property that has been hashed
  */
 userSchema.methods.setHashedPassword = function(password){
   debug('enterd userSchema.methods.setHashedPassword');
