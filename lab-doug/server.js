@@ -8,6 +8,7 @@ const httpErrors = require('http-errors');
 
 //app modules
 const errorHandler = require('./lib/error-handler');
+const authRouter = require('./route/auth-router');
 //routes
 
 //module constants
@@ -20,7 +21,7 @@ mongoose.connect(mongoURI);
 
 // app.use(httpErrors);
 app.use(morgan('dev'));
-
+app.use('/api', authRouter);
 //routes
 app.all('*', function(req, res, next){
   debug('this route is not registered');
