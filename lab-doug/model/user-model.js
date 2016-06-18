@@ -39,7 +39,7 @@ userSchema.methods.compareHashedPassword = function (password) {
      */
     bcrypt.compare(password, this.password, (err, result) => {
       if(err) return reject(err);
-      if(!result) return reject(http-errors(401, err.name));
+      if(!result) return reject(httpErrors(401, err.name));
       resolve(this);
     });
   });
@@ -63,7 +63,7 @@ userSchema.method.setFindHash = function(){
        */
       this.save()
       .then(() => resolve(this.findHash))
-      .catch(err){
+      .catch((err) => {
         if(tries > 10) reject(err);
         tries++;
 
@@ -71,7 +71,7 @@ userSchema.method.setFindHash = function(){
          * when you re-call the method below, you need to provide the same context as when you originally called it at the top of the method.
          */
         _setFindHash.call(this);
-      }
+      });
     }
   });
 };
@@ -79,11 +79,11 @@ userSchema.method.setFindHash = function(){
 /**
  * userSchema.method.setToken - the only thing calling this function will be the setFindHash function when it wants to create a token for a user
  *
- * @return {String}  jwt generated token
+ * @return {String}  jwt generated token, which is the users encrypted findHash value
  */
 userSchema.method.setToken = function(){
   debug('entered userSchema.method.setToken');
-  return new Promise((resolve, reject){
+  return new Promise((resolve, reject) => {
     this.setFindHash()
 
     /**
@@ -98,4 +98,4 @@ userSchema.method.setToken = function(){
 /**
  * we place the export statement at the bottom so that the userSchema properties and methods exist before the export.
  */
-export.modules = mongoose.model('user', userSchema);
+exports.module = mongoose.model('user', userSchema);
