@@ -5,7 +5,9 @@ const debug = require('debug')('auth:parse-basic-debug');
 
 module.exports = function(req, res, next){
   debug('calling the parse-basic-auth function');
-  var authHeader = req.header.authorization;//base64 encoded
+  if(!req.headers.authorization)
+    return next(httpErrors('401', 'request does not contain a authorization header'));
+  var authHeader = req.headers.authorization;//base64 encoded
   var authHeaderNamePassword = authHeader.split(' ')[1];//generate array with auth header components and select base64 encoded string in index 1
   var namePasswordDecoded = new Buffer(authHeaderNamePassword, 'base64').toString('utf8'); //decode and the output is 'billy:myeasypassword'
   var namePassword = namePasswordDecoded.split(':');
