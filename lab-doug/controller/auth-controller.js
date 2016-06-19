@@ -26,7 +26,7 @@ exports.signup = function(reqBody){
 
 
 /**
- * auth-controller.signin - accesses the authorization header of a user's signin request and uses it to verifies the user exists in the database. If user exists, leverage bcrypt.compare method to hash the password provided by the user in the request.  It then uses bcrypt.compare method to compare the newly hashed password with the users hashed password stored in the database. If the two hash passwords match, a token will be created for the user by generating a new findHash value and encrypting the findHash value with .setToken method.  The token will be returned to the client for use in this session.
+ * auth-controller.signin - accesses the authorization header of a user's signin request and uses it to verify the user exists in the database. If user exists, leverage bcrypt.compare method to hash the password provided by the user in the request.  It then uses bcrypt.compare method to compare the newly hashed password with the users hashed password stored in the database. If the two hash passwords match, a token will be created for the user by generating a new findHash value and encrypting the findHash value with .setToken method.  The token will be returned to the client for use in this session.
  *
  * @param  {type} auth description
  * @return {String}      token which contains the users encrypted findHash value

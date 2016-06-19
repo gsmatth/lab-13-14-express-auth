@@ -53,7 +53,7 @@ describe('Testing the auth-router', function(){
     });
 
     it('should return a token', function(done){
-      debug('enterd first it statement in POST signup router, auth-router.js');
+      debug('entered first it statement in POST signup router, auth-router.js');
       request.post(`${baseURL}/signup`)
       .send({
         username: 'Bobbytestname',
