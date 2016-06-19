@@ -15,7 +15,7 @@ const authRouter = require('./route/auth-router');
 //module constants
 const app = express();
 const port = process.env.PORT || 3000;
-const mongoURI = process.env.MONGO_URI || 'mongodb://localhost/auth';
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/auth';
 
 
 mongoose.connect(mongoURI);
@@ -25,7 +25,7 @@ app.use(morgan('dev'));
 app.use('/api', authRouter);
 //routes
 app.all('*', function(req, res, next){
-  debug('this route is not registered');
+  debug('entered app.all route in server.js:  this route is not registered');
   /**
    * We create a new error using http-errors module and include it as the argument passed in next.  By calling next with an error, we trigger the errorHandler middleware module to handle this error
    */
