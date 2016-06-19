@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "bcrypt": "^0.8.7",
+    "bluebird": "^3.4.1",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "http-errors": "^1.5.0",

@@ -23,9 +23,13 @@ const userSchema = mongoose.Schema({
 userSchema.methods.setHashedPassword = function(password){
   debug('enterd userSchema.methods.setHashedPassword');
   return new Promise((resolve, reject) =>{
+    console.log('password in setHasehdPassword: ', password);
     bcrypt.hash(password, 10, (err, hash) => {
+      console.log('hash in bcrypt.hash: ', hash);
       if(err) return reject(err);
       this.password = hash;
+      console.log('this.password in setHashedPassword: ', this.password);
+      console.log('this in setHashedPassword: ', this);
 
       /**
        * 'this' is the instance of the user you are using now.  By using 'this' here, we will be able to chain methods after this resolves.
@@ -50,7 +54,7 @@ userSchema.methods.compareHashedPassword = function (password) {
   });
 };
 
-userSchema.method.setFindHash = function(){
+userSchema.methods.setFindHash = function(){
   debug('entered userSchema.method.setFindHash');
   return new Promise((resolve, reject)=> {
     var tries = 0;
@@ -61,7 +65,10 @@ userSchema.method.setFindHash = function(){
     _setFindHash.call(this);
 
     function _setFindHash(){
+      console.log('called _setFindHash in setFindHash mehtod of user-model');
       this.findHash = crypto.randomBytes(128).toString('hex');
+      console.log('this.findHash value in _setFindHash: ', this.findHash);
+      console.log('this value in _setFindHash: ', this);
 
       /**
        * save will throw an error if the findHash we generated is not unique because we specified that property as 'unique:true' in our model.  The mongoose 'save' method returns user in this case and ew only return the findHash value of the user in the then block.
@@ -86,7 +93,7 @@ userSchema.method.setFindHash = function(){
  *
  * @return {String}  jwt generated token, which is the users encrypted findHash value
  */
-userSchema.method.setToken = function(){
+userSchema.methods.setToken = function(){
   debug('entered userSchema.method.setToken');
   return new Promise((resolve, reject) => {
     this.setFindHash()

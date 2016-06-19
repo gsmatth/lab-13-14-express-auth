@@ -4,6 +4,7 @@ const express = require('express');
 const morgan = require('morgan');
 const debug = require('debug')('auth:server');
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 const httpErrors = require('http-errors');
 
 //app modules
